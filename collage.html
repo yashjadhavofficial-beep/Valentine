@@ -3,78 +3,101 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Our Memories</title>
+    <title>Our Story</title>
     <style>
         body {
             background-color: #fff0f3;
             margin: 0;
             padding: 20px;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
             color: #d63384;
         }
 
-        h2 {
+        /* Message Section */
+        .header-section {
             text-align: center;
-            font-size: 2.5rem;
-            margin-bottom: 30px;
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+            padding: 50px 20px;
+            animation: fadeIn 3s ease-in;
+        }
+
+        h2 {
+            font-size: 2.8rem;
+            margin-bottom: 10px;
+            color: #d63384;
+        }
+
+        .apology-text {
+            font-size: 1.5rem;
+            color: #7d5a65;
+            font-style: italic;
+            margin-top: 10px;
+            line-height: 1.6;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
         }
 
         /* The Grid Layout */
         .collage-container {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 20px;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 25px;
             max-width: 1200px;
             margin: 0 auto;
+            padding-bottom: 50px;
         }
 
         /* Styling each photo card */
         .photo-card {
             background: white;
-            padding: 10px;
-            border-radius: 10px;
-            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
-            transition: transform 0.3s ease;
-            text-align: center;
+            padding: 12px;
+            border-radius: 15px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.08);
+            transition: transform 0.4s ease;
         }
 
         .photo-card:hover {
-            transform: scale(1.03) rotate(1deg);
+            transform: translateY(-10px) rotate(2deg);
         }
 
         .photo-card img {
             width: 100%;
-            height: 300px;
+            height: 350px;
             object-fit: cover;
-            border-radius: 5px;
+            border-radius: 10px;
             display: block;
         }
 
-        .photo-card p {
-            margin: 10px 0 5px 0;
-            font-style: italic;
-            font-weight: bold;
+        /* Animations */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
         }
 
         /* Back Button */
         .back-btn {
             display: block;
-            width: 150px;
+            width: 180px;
             margin: 40px auto;
             text-align: center;
             background: #ff4d6d;
             color: white;
-            padding: 12px;
+            padding: 15px;
             text-decoration: none;
-            border-radius: 25px;
+            border-radius: 50px;
             font-weight: bold;
+            box-shadow: 0 4px 15px rgba(255, 77, 109, 0.3);
         }
     </style>
 </head>
 <body>
 
-    <h2>I knew you'd say Yes! ❤️</h2>
+    <div class="header-section">
+        <h2>I knew you'd say Yes! ❤️</h2>
+        <p class="apology-text">
+            I'm sorry for everything, our story deserves one more chance!
+        </p>
+    </div>
 
     <div class="collage-container" id="photo-grid">
         </div>
@@ -84,26 +107,21 @@
     <script>
         const grid = document.getElementById('photo-grid');
         
-        // This loop generates all 18 photos automatically
+        // This generates slots for photo1.jpg through photo18.jpg
         for (let i = 1; i <= 18; i++) {
             const card = document.createElement('div');
             card.className = 'photo-card';
 
             const img = document.createElement('img');
-            // Change ".jpg" to ".png" or ".jpeg" below if your files use those instead!
             img.src = `photo${i}.jpg`; 
-            img.alt = `Memory ${i}`;
+            img.alt = `Our Memory ${i}`;
             
-            // This handles cases where a photo might be missing so the site doesn't look broken
+            // If a specific photo fails to load, hide that card so it doesn't look broken
             img.onerror = function() {
                 this.parentElement.style.display = 'none';
             };
 
-            const caption = document.createElement('p');
-            caption.innerText = `Moment #${i}`;
-
             card.appendChild(img);
-            card.appendChild(caption);
             grid.appendChild(card);
         }
     </script>
